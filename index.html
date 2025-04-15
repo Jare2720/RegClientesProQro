@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulario de Registro de Clientes</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     header {
       background-color: #003366;
       color: white;
       padding: 20px;
     }
+
     .form-container {
       background-color: #f3f4f6;
       padding: 20px;
@@ -18,6 +21,7 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
     .input-field {
       width: 100%;
       padding: 10px;
@@ -26,6 +30,7 @@
       border-radius: 5px;
       background-color: white;
     }
+
     .submit-btn {
       width: 100%;
       padding: 10px;
@@ -35,23 +40,28 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .submit-btn:hover {
       background-color: #002244;
     }
+
     .message {
       text-align: center;
       padding: 10px;
       border-radius: 5px;
       margin-top: 20px;
     }
+
     .message.success {
       background-color: #4CAF50;
       color: white;
     }
+
     .message.error {
       background-color: #F44336;
       color: white;
     }
+
     .label {
       font-weight: bold;
       display: block;
@@ -63,10 +73,11 @@
 
   <header>
     <div class="flex justify-between items-center">
-      <img src="https://raw.githubusercontent.com/Jare2720/Reg_BD_ProQro_VA/main/Logo%20ProQro.png" alt="Logo ProQro" class="w-32">
+      <img src="https://raw.githubusercontent.com/Jare2720/RegClientesProQro/main/Pag%20ppal%20-%20Logo%20redondo.png" alt="Logo ProQro" class="w-32">
       <div class="text-right text-sm">
-        <p>Servicio de Asesoría Inmobiliaria</p>
-        <p class="text-sm italic">Juntos encontraremos el hogar de tus sueños!</p>
+        <p>SERVICIO de ASESORÍA</p>
+        <p>INMOBILIARIA</p>
+        <p class="italic">Juntos encontraremos el hogar de tus sueños!</p>
       </div>
     </div>
   </header>
@@ -75,17 +86,17 @@
     <form id="registroForm">
       <div>
         <label class="label" for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="Nombre" required class="input-field" placeholder="Escribe tu nombre">
+        <input type="text" id="nombre" name="Nombre" required class="input-field" placeholder="Escribe tu nombre" />
       </div>
 
       <div>
         <label class="label" for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="Teléfono" required class="input-field" placeholder="Escribe tu teléfono">
+        <input type="tel" id="telefono" name="Teléfono" required class="input-field" placeholder="Escribe tu teléfono" />
       </div>
 
       <div>
         <label class="label" for="correo">Correo electrónico</label>
-        <input type="email" id="correo" name="Correo" required class="input-field" placeholder="Escribe tu correo electrónico">
+        <input type="email" id="correo" name="Correo" required class="input-field" placeholder="Escribe tu correo electrónico" />
       </div>
 
       <div>
@@ -102,7 +113,7 @@
 
       <div>
         <label class="label" for="zona">Zona de interés</label>
-        <input type="text" id="zona" name="Zona de interés" required class="input-field" placeholder="Escribe la zona de interés">
+        <input type="text" id="zona" name="Zona de interés" required class="input-field" placeholder="Escribe la zona de interés" />
       </div>
 
       <div>
@@ -132,8 +143,8 @@
       </div>
 
       <div>
-        <label class="label" for="motivo">¿Buscas para vivir o invertir?</label>
-        <select id="motivo" name="Motivo" required class="input-field">
+        <label class="label" for="objetivo">¿Buscas para vivir o invertir?</label>
+        <select id="objetivo" name="Motivo" required class="input-field">
           <option value="" disabled selected>Selecciona una opción</option>
           <option value="Vivir">Vivir</option>
           <option value="Invertir">Invertir</option>
@@ -176,23 +187,21 @@
       })
       .then(response => response.json())
       .then(data => {
-        const messageDiv = document.getElementById("message");
+        const message = document.getElementById("message");
         if (data.success) {
-          messageDiv.innerHTML = "Registro enviado con éxito!";
-          messageDiv.className = "message success";
+          message.innerHTML = "Registro enviado con éxito!";
+          message.className = "message success";
         } else {
-          messageDiv.innerHTML = "Error al enviar el formulario.";
-          messageDiv.className = "message error";
+          message.innerHTML = "Error al enviar el formulario.";
+          message.className = "message error";
         }
         event.target.reset();
-        setTimeout(() => {
-          messageDiv.innerHTML = "";
-        }, 3000);
+        setTimeout(() => { message.innerHTML = ""; }, 3000);
       })
-      .catch(() => {
-        const messageDiv = document.getElementById("message");
-        messageDiv.innerHTML = "Error en la conexión.";
-        messageDiv.className = "message error";
+      .catch(error => {
+        const message = document.getElementById("message");
+        message.innerHTML = "Error en la conexión.";
+        message.className = "message error";
       });
     });
   </script>

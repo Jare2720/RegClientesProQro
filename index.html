@@ -175,32 +175,44 @@
     <div id="message" class="message"></div>
   </div>
 
-  <script>
-  document.getElementById("registroForm").addEventListener("submit", function(event) {
+<script>
+  const form = document.getElementById("registroForm");
+  const telefonoInput = document.getElementById("telefono");
+  const correoInput = document.getElementById("correo");
+  const messageBox = document.getElementById("message");
+
+  // Validación en tiempo real - Teléfono
+  telefonoInput.addEventListener("input", function () {
+    const valor = telefonoInput.value.replace(/\D/g, "");
+    telefonoInput.value = valor;
+    if (valor.length < 10) {
+      telefonoInput.setCustomValidity("El teléfono debe tener al menos 10 dígitos.");
+    } else {
+      telefonoInput.setCustomValidity("");
+    }
+  });
+
+  // Validación en tiempo real - Correo
+  correoInput.addEventListener("input", function () {
+    const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!correoValido.test(correoInput.value)) {
+      correoInput.setCustomValidity("Por favor escribe un correo válido.");
+    } else {
+      correoInput.setCustomValidity("");
+    }
+  });
+
+  // Envío del formulario
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
-    
-    const telefono = document.getElementById("telefono").value.trim();
-    const correo = document.getElementById("correo").value.trim();
-    const message = document.getElementById("message");
 
-    // Validación de teléfono (solo números y mínimo 10 dígitos)
-    const telefonoRegex = /^\d{10,}$/;
-    if (!telefonoRegex.test(telefono)) {
-      message.textContent = "Por favor ingresa un número de teléfono válido (solo números, al menos 10 dígitos).";
-      message.className = "message error";
+    // Si el formulario no es válido, no se envía
+    if (!form.checkValidity()) {
+      form.reportValidity();
       return;
     }
 
-    // Validación de correo electrónico (formato básico)
-    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!correoRegex.test(correo)) {
-      message.textContent = "Por favor ingresa un correo electrónico válido.";
-      message.className = "message error";
-      return;
-    }
-
-    const formData = new FormData(event.target);
-
+    const formData = new FormData(form);
     fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
       method: "POST",
       body: formData
@@ -208,22 +220,26 @@
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        message.textContent = "Registro enviado con éxito!";
-        message.className = "message success";
-        event.target.reset();
+        messageBox.innerHTML = "¡Registro enviado con éxito!";
+        messageBox.className = "message success";
       } else {
-        message.textContent = "Error al enviar el formulario.";
-        message.className = "message error";
+        messageBox.innerHTML = "Error al enviar el formulario.";
+        messageBox.className = "message error";
       }
-      setTimeout(() => { message.textContent = ""; }, 3000);
+      form.reset();
+
+      // Ocultar mensaje después de 10 segundos
+      setTimeout(() => {
+        messageBox.className = "message hidden";
+        messageBox.innerHTML = "";
+      }, 10000);
     })
     .catch(error => {
-      message.textContent = "Error en la conexión.";
-      message.className = "message error";
+      messageBox.innerHTML = "Error en la conexión.";
+      messageBox.className = "message error";
     });
   });
 </script>
-
 
   <!-- Bloque de contacto por WhatsApp -->
   <div class="mt-6 text-center">

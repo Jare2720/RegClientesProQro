@@ -176,34 +176,52 @@
   </div>
 
   <script>
-    document.getElementById("registroForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
+  document.getElementById("registroForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
-        method: "POST",
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        const message = document.getElementById("message");
-        if (data.success) {
-          message.innerHTML = "Registro enviado con éxito!";
-          message.className = "message success";
-        } else {
-          message.innerHTML = "Error al enviar el formulario.";
-          message.className = "message error";
-        }
+    const telefono = document.getElementById("telefono").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const message = document.getElementById("message");
+
+    // Validación de teléfono
+    if (!/^\d{10,}$/.test(telefono)) {
+      message.innerHTML = "El teléfono debe contener solo números y al menos 10 dígitos.";
+      message.className = "message error";
+      return;
+    }
+
+    // Validación de correo
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      message.innerHTML = "Por favor ingresa un correo electrónico válido.";
+      message.className = "message error";
+      return;
+    }
+
+    const formData = new FormData(event.target);
+
+    fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        message.innerHTML = "Registro enviado con éxito!";
+        message.className = "message success";
         event.target.reset();
-        setTimeout(() => { message.innerHTML = ""; }, 3000);
-      })
-      .catch(error => {
-        const message = document.getElementById("message");
-        message.innerHTML = "Error en la conexión.";
+      } else {
+        message.innerHTML = "Error al enviar el formulario.";
         message.className = "message error";
-      });
+      }
+      setTimeout(() => { message.innerHTML = ""; }, 3000);
+    })
+    .catch(error => {
+      message.innerHTML = "Error en la conexión.";
+      message.className = "message error";
     });
-   </script>
+  });
+</script>
+
 
   <!-- Bloque de contacto por WhatsApp -->
   <div class="mt-6 text-center">

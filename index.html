@@ -175,7 +175,7 @@
     <div id="message" class="message"></div>
   </div>
 
-  <!-- Bloque de contacto por WhatsApp -->
+<!-- Bloque de contacto por WhatsApp -->
 <div class="mt-6 text-center">
   <p class="mb-2">¿Tienes dudas o quieres contactarnos directamente?</p>
   <a href="https://wa.me/525532018918" target="_blank" class="inline-flex items-center text-green-600 hover:underline">
@@ -194,8 +194,10 @@
   telefonoInput.addEventListener("input", function () {
     const valor = telefonoInput.value.replace(/\D/g, "");
     telefonoInput.value = valor;
+
     if (valor.length < 10) {
       telefonoInput.setCustomValidity("El teléfono debe tener al menos 10 dígitos.");
+      telefonoInput.reportValidity();
     } else {
       telefonoInput.setCustomValidity("");
     }
@@ -206,6 +208,7 @@
     const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     if (!correoValido.test(correoInput.value)) {
       correoInput.setCustomValidity("Por favor escribe un correo válido.");
+      correoInput.reportValidity();
     } else {
       correoInput.setCustomValidity("");
     }
@@ -215,7 +218,6 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Si el formulario no es válido, no se envía
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -249,6 +251,7 @@
     });
   });
 </script>
-  
+
 </body>
 </html>
+

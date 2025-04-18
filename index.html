@@ -175,64 +175,81 @@
     <div id="message" class="message"></div>
   </div>
 
-  <script>
-  document.getElementById("registroForm").addEventListener("submit", function(event) {
+ <!-- VALIDACIÓN Y ENVÍO -->
+<script>
+  const form = document.getElementById("registroForm");
+  const message = document.getElementById("message");
+  const telefonoInput = document.getElementById("telefono");
+  const correoInput = document.getElementById("correo");
+  const errorTelefono = document.getElementById("error-telefono");
+  const errorCorreo = document.getElementById("error-correo");
+
+  function limpiarMensajes() {
+    message.textContent = "";
+    message.className = "message";
+    errorTelefono.textContent = "";
+    errorCorreo.textContent = "";
+  }
+
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
-    
-    const telefono = document.getElementById("telefono").value.trim();
-    const correo = document.getElementById("correo").value.trim();
-    const message = document.getElementById("message");
 
-    // Validación de teléfono (solo números y mínimo 10 dígitos)
-    const telefonoRegex = /^\d{10,}$/;
-    if (!telefonoRegex.test(telefono)) {
-      message.textContent = "Por favor ingresa un número de teléfono válido (solo números, al menos 10 dígitos).";
-      message.className = "message error";
-      return;
+    limpiarMensajes();
+
+    const telefono = telefonoInput.value.trim();
+    const correo = correoInput.value.trim();
+
+    let hayErrores = false;
+
+    // Validar teléfono
+    if (!/^\d{10,}$/.test(telefono)) {
+      errorTelefono.textContent = "Ingresa un número válido de al menos 10 dígitos.";
+      hayErrores = true;
     }
 
-    // Validación de correo electrónico (formato básico)
-    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!correoRegex.test(correo)) {
-      message.textContent = "Por favor ingresa un correo electrónico válido.";
-      message.className = "message error";
-      return;
+    // Validar correo
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      errorCorreo.textContent = "Ingresa un correo electrónico válido.";
+      hayErrores = true;
     }
 
-    const formData = new FormData(event.target);
+    if (hayErrores) return;
+
+    const formData = new FormData(form);
 
     fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
       method: "POST",
-      body: formData
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        message.textContent = "Registro enviado con éxito!";
-        message.className = "message success";
-        event.target.reset();
-      } else {
-        message.textContent = "Error al enviar el formulario.";
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          message.textContent = "Registro enviado con éxito!";
+          message.className = "message success";
+          form.reset();
+          setTimeout(() => {
+            limpiarMensajes();
+          }, 4000); // Desaparece en menos de 5 segundos
+        } else {
+          message.textContent = "Error al enviar el formulario.";
+          message.className = "message error";
+        }
+      })
+      .catch((error) => {
+        message.textContent = "Error en la conexión.";
         message.className = "message error";
-      }
-      setTimeout(() => { message.textContent = ""; }, 3000);
-    })
-    .catch(error => {
-      message.textContent = "Error en la conexión.";
-      message.className = "message error";
-    });
+      });
   });
 </script>
 
-
-  <!-- Bloque de contacto por WhatsApp -->
-  <div class="mt-6 text-center">
-    <p class="mb-2">¿Tienes dudas o quieres contactarnos directamente?</p>
-    <a href="https://wa.me/525532018918" target="_blank" class="inline-flex items-center text-green-600 hover:underline">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6 mr-2">
-      +52 5532018918
-    </a>
-  </div>
+<!-- BOTÓN FLOTANTE DE WHATSAPP -->
+<a href="https://wa.me/525532018918" target="_blank" aria-label="WhatsApp"
+  class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50 transition duration-300">
+  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+    <path
+      d="M12.04 2C6.51 2 2 6.49 2 12.01c0 1.98.52 3.82 1.43 5.42L2 22l4.66-1.39A10.005 10.005 0 0012.04 22C17.57 22 22 17.51 22 12S17.57 2 12.04 2zm0 18.17c-1.77 0-3.42-.52-4.81-1.41l-.34-.21-2.76.82.82-2.69-.22-.35a8.04 8.04 0 01-1.3-4.44c0-4.43 3.61-8.03 8.03-8.03 4.43 0 8.03 3.61 8.03 8.03s-3.6 8.03-8.03 8.03zm4.43-6.09c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12s-.62.77-.76.93c-.14.16-.28.17-.52.06-.24-.12-1.01-.37-1.92-1.17-.71-.63-1.19-1.41-1.33-1.65s-.01-.36.1-.48c.1-.1.24-.26.36-.39.12-.13.16-.22.24-.37.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.76-.2-.48-.4-.41-.54-.42-.14-.01-.3-.01-.46-.01s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.33.98 2.49c.12.16 1.7 2.59 4.12 3.63.58.25 1.03.4 1.38.51.58.19 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" />
+  </svg>
+</a>
 
 </body>
 </html>

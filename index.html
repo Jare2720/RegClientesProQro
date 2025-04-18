@@ -175,15 +175,6 @@
     <div id="message" class="message"></div>
   </div>
 
-<!-- Bloque de contacto por WhatsApp -->
-<div class="mt-6 text-center">
-  <p class="mb-2">¿Tienes dudas o quieres contactarnos directamente?</p>
-  <a href="https://wa.me/525532018918" target="_blank" class="inline-flex items-center text-green-600 hover:underline">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6 mr-2">
-    +52 5532018918
-  </a>
-</div>
-
 <script>
   const form = document.getElementById("registroForm");
   const telefonoInput = document.getElementById("telefono");
@@ -199,25 +190,22 @@
   function validarTelefono() {
     const valor = telefonoInput.value.replace(/\D/g, "");
     telefonoInput.value = valor;
-
-    if (valor.length > 0 && valor.length < 10) {
+    if (valor.length < 10) {
       telefonoInput.setCustomValidity("El teléfono debe tener al menos 10 dígitos.");
+      telefonoInput.reportValidity();
     } else {
       telefonoInput.setCustomValidity("");
     }
-    telefonoInput.reportValidity(); // Solo se muestra si está mal
   }
 
   function validarCorreo() {
     const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    const valor = correoInput.value.trim();
-
-    if (valor !== "" && !correoValido.test(valor)) {
+    if (!correoValido.test(correoInput.value)) {
       correoInput.setCustomValidity("Por favor escribe un correo válido.");
+      correoInput.reportValidity();
     } else {
       correoInput.setCustomValidity("");
     }
-    correoInput.reportValidity();
   }
 
   // Envío del formulario
@@ -259,3 +247,16 @@
     });
   });
 </script>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/525532018918" 
+   target="_blank" 
+   class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50"
+   title="Contáctanos por WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+       alt="WhatsApp" 
+       class="w-6 h-6"/>
+</a>
+
+</body>
+</html>

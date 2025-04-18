@@ -191,7 +191,18 @@
   const messageBox = document.getElementById("message");
 
   // Validación al salir del campo - Teléfono
-  telefonoInput.addEventListener("blur", function () {
+  telefonoInput.addEventListener("blur", validarTelefono);
+
+  // Validación al salir del campo - Correo
+  correoInput.addEventListener("blur", validarCorreo);
+
+  // Validación también al entrar a otro campo (focusin)
+  form.addEventListener("focusin", (e) => {
+    if (document.activeElement !== telefonoInput) validarTelefono();
+    if (document.activeElement !== correoInput) validarCorreo();
+  });
+
+  function validarTelefono() {
     const valor = telefonoInput.value.replace(/\D/g, "");
     telefonoInput.value = valor;
     if (valor.length < 10) {
@@ -199,21 +210,23 @@
     } else {
       telefonoInput.setCustomValidity("");
     }
-  });
+  }
 
-  // Validación al salir del campo - Correo
-  correoInput.addEventListener("blur", function () {
+  function validarCorreo() {
     const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     if (!correoValido.test(correoInput.value)) {
       correoInput.setCustomValidity("Por favor escribe un correo válido.");
     } else {
       correoInput.setCustomValidity("");
     }
-  });
+  }
 
   // Envío del formulario
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    validarTelefono();
+    validarCorreo();
 
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -249,8 +262,6 @@
   });
 </script>
 
-</body>
-</html>
 
 
 

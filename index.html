@@ -2,124 +2,112 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registro de Clientes</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/4a5e6d7a9f.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
-  <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
-    <h1 class="text-2xl font-bold mb-6 text-center">Registro de Clientes</h1>
-    <form id="registroForm" method="POST" action="https://script.google.com/macros/s/AKfycbwvVx28TONBRyXJalzfraj8OErDPRrcVQAtll7sTGBWQKbDagUDRk6amr6QHJjsd-PF/exec">
-      
-      <div class="mb-4">
-        <label for="nombre" class="block font-medium">Nombre:</label>
-        <input type="text" id="nombre" name="Nombre" required class="mt-1 w-full px-3 py-2 border rounded" />
-      </div>
 
-      <div class="mb-4">
-        <label for="telefono" class="block font-medium">Teléfono:</label>
-        <input type="text" id="telefono" name="Teléfono" required class="mt-1 w-full px-3 py-2 border rounded" />
-        <span id="telefonoError" class="text-red-500 text-sm mt-1 hidden">El teléfono debe tener exactamente 10 dígitos numéricos.</span>
+  <!-- Encabezado -->
+  <header class="bg-white shadow-md py-4 px-6 flex flex-col md:flex-row items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://github.com/Jare2720/RegClientesProQro/blob/main/Pag%20ppal%20-%20Logo%20redondo.png?raw=true" alt="Logo" class="w-20 h-20 object-contain">
+      <div class="text-left leading-tight">
+        <p class="text-sm font-semibold">SERVICIO de ASESORÍA</p>
+        <p class="text-sm font-semibold">INMOBILIARIA</p>
+        <p class="text-sm italic">Juntos encontraremos el hogar de tus sueños!</p>
       </div>
+    </div>
+    <div class="mt-4 md:mt-0 flex space-x-4">
+      <a href="https://wa.me/525532018918" target="_blank" class="text-green-600 text-2xl hover:text-green-800" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.proyectatenqro.com" target="_blank" class="text-blue-600 text-2xl hover:text-blue-800" title="Sitio Web">
+        <i class="fas fa-globe"></i>
+      </a>
+    </div>
+  </header>
 
-      <div class="mb-4">
-        <label for="correo" class="block font-medium">Correo:</label>
-        <input type="email" id="correo" name="Correo" required class="mt-1 w-full px-3 py-2 border rounded" />
+  <!-- Formulario -->
+  <main class="flex justify-center mt-8">
+    <form id="registroForm" class="bg-white p-6 rounded shadow-md w-full max-w-2xl space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" name="Nombre" placeholder="Nombre completo" required class="border p-2 rounded w-full">
+        <input type="tel" name="Teléfono" id="telefono" placeholder="Teléfono" required class="border p-2 rounded w-full">
+        <input type="email" name="Correo" id="correo" placeholder="Correo electrónico" required class="border p-2 rounded w-full">
+        <input type="text" name="Tipo de propiedad" placeholder="Tipo de propiedad" required class="border p-2 rounded w-full">
+        <input type="text" name="Zona de interés" placeholder="Zona de interés" required class="border p-2 rounded w-full">
+        <input type="text" name="Presupuesto" placeholder="Presupuesto" required class="border p-2 rounded w-full">
+        <input type="text" name="Origen" placeholder="¿Cómo nos conoció?" required class="border p-2 rounded w-full">
+        <input type="text" name="Motivo" placeholder="Motivo (Vivir / Invertir)" required class="border p-2 rounded w-full">
+        <input type="text" name="Tiempo" placeholder="Tiempo estimado de compra" required class="border p-2 rounded w-full">
       </div>
-
-      <div class="mb-4">
-        <label for="tipo" class="block font-medium">Tipo de propiedad:</label>
-        <select id="tipo" name="Tipo de propiedad" required class="mt-1 w-full px-3 py-2 border rounded">
-          <option value="" disabled selected hidden></option>
-          <option value="Casa">Casa</option>
-          <option value="Departamento">Departamento</option>
-          <option value="Terreno">Terreno</option>
-          <option value="Comercial">Comercial</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label for="zona" class="block font-medium">Zona de interés:</label>
-        <input type="text" id="zona" name="Zona de interés" required class="mt-1 w-full px-3 py-2 border rounded" />
-      </div>
-
-      <div class="mb-4">
-        <label for="presupuesto" class="block font-medium">Presupuesto:</label>
-        <input type="text" id="presupuesto" name="Presupuesto" required class="mt-1 w-full px-3 py-2 border rounded" />
-      </div>
-
-      <div class="mb-4">
-        <label for="origen" class="block font-medium">¿Cómo nos conoció?</label>
-        <select id="origen" name="Origen" required class="mt-1 w-full px-3 py-2 border rounded">
-          <option value="" disabled selected hidden></option>
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Sitio web">Sitio web</option>
-          <option value="Referido">Referido</option>
-          <option value="EasyBroker">EasyBroker</option>
-          <option value="Proppit">Proppit</option>
-          <option value="Lona">Lona</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label for="motivo" class="block font-medium">Propósito:</label>
-        <select id="motivo" name="Motivo" required class="mt-1 w-full px-3 py-2 border rounded">
-          <option value="" disabled selected hidden></option>
-          <option value="Vivir">Vivir</option>
-          <option value="Invertir">Invertir</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label for="tiempo" class="block font-medium">¿En cuánto tiempo planea comprar?</label>
-        <input type="text" id="tiempo" name="Tiempo" required class="mt-1 w-full px-3 py-2 border rounded" />
-      </div>
-
-      <div class="mb-4">
-        <label for="comentarios" class="block font-medium">Comentarios:</label>
-        <textarea id="comentarios" name="Comentarios" rows="3" class="mt-1 w-full px-3 py-2 border rounded"></textarea>
-      </div>
-
-      <div class="text-center">
-        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Enviar</button>
-      </div>
+      <textarea name="Comentarios" rows="3" placeholder="Comentarios adicionales" class="border p-2 rounded w-full"></textarea>
+      <div id="mensajeError" class="text-red-600 text-sm hidden"></div>
+      <div id="mensajeExito" class="text-green-600 text-sm hidden">Formulario enviado con éxito.</div>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Enviar</button>
     </form>
-
-    <div id="mensajeExito" class="mt-4 text-green-600 text-center hidden">¡Formulario enviado con éxito!</div>
-  </div>
+  </main>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("registroForm");
-      const telefonoInput = document.getElementById("telefono");
-      const telefonoError = document.getElementById("telefonoError");
+    const form = document.getElementById("registroForm");
+    const mensajeError = document.getElementById("mensajeError");
+    const mensajeExito = document.getElementById("mensajeExito");
+    const telefonoInput = document.getElementById("telefono");
+    const correoInput = document.getElementById("correo");
 
-      telefonoInput.addEventListener("input", function () {
-        const valor = telefonoInput.value.trim();
-        if (!/^\d{10}$/.test(valor)) {
-          telefonoInput.classList.add("border-red-500");
-          telefonoError.classList.remove("hidden");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      mensajeError.classList.add("hidden");
+      mensajeExito.classList.add("hidden");
+
+      const telefono = telefonoInput.value.trim();
+      const correo = correoInput.value.trim();
+
+      const telefonoValido = /^\d{10,}$/.test(telefono);
+      const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+
+      if (!telefonoValido) {
+        mensajeError.textContent = "Por favor ingresa un número de teléfono válido (al menos 10 dígitos).";
+        mensajeError.classList.remove("hidden");
+        return;
+      }
+
+      if (!correoValido) {
+        mensajeError.textContent = "Por favor ingresa un correo electrónico válido.";
+        mensajeError.classList.remove("hidden");
+        return;
+      }
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      fetch("https://script.google.com/macros/s/AKfycbwvVx28TONBRyXJalzfraj8OErDPRrcVQAtll7sTGBWQKbDagUDRk6amr6QHJjsd-PF/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          mensajeExito.classList.remove("hidden");
+          form.reset();
         } else {
-          telefonoInput.classList.remove("border-red-500");
-          telefonoError.classList.add("hidden");
+          mensajeError.textContent = "Hubo un error al enviar el formulario.";
+          mensajeError.classList.remove("hidden");
         }
-      });
-
-      form.addEventListener("submit", function (e) {
-        const valor = telefonoInput.value.trim();
-        if (!/^\d{10}$/.test(valor)) {
-          e.preventDefault();
-          telefonoInput.classList.add("border-red-500");
-          telefonoError.classList.remove("hidden");
-          telefonoInput.focus();
-        }
+      })
+      .catch(() => {
+        mensajeError.textContent = "Error de conexión. Intenta más tarde.";
+        mensajeError.classList.remove("hidden");
       });
     });
   </script>
 </body>
 </html>
+
 
 
 

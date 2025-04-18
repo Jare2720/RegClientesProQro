@@ -210,6 +210,7 @@
     } else {
       telefonoInput.setCustomValidity("");
     }
+    telefonoInput.reportValidity(); // Mostrar mensaje inmediatamente
   }
 
   function validarCorreo() {
@@ -219,6 +220,7 @@
     } else {
       correoInput.setCustomValidity("");
     }
+    correoInput.reportValidity(); // Mostrar mensaje inmediatamente
   }
 
   // Envío del formulario
@@ -261,6 +263,7 @@
     });
   });
 </script>
+
 
 
 

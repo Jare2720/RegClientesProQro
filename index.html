@@ -185,64 +185,77 @@
   </div>
 
 <script>
-  const form = document.getElementById("registroForm");
-  const message = document.getElementById("message");
-  const telefonoInput = document.getElementById("telefono");
-  const correoInput = document.getElementById("correo");
-  const errorTelefono = document.getElementById("error-telefono");
-  const errorCorreo = document.getElementById("error-correo");
+document.getElementById("registroForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  
+  let isValid = true;
 
-  function limpiarMensajes() {
-    message.textContent = "";
-    message.className = "message";
-    errorTelefono.textContent = "";
-    errorCorreo.textContent = "";
+  const telefonoInput = document.getElementById("Telefono");
+  const correoInput = document.getElementById("Correo");
+
+  const telefonoError = document.getElementById("telefonoError");
+  const correoError = document.getElementById("correoError");
+
+  const telefono = telefonoInput.value.trim();
+  const correo = correoInput.value.trim();
+
+  // Validación teléfono
+  const soloNumeros = /^\d{10,}$/;
+  if (!soloNumeros.test(telefono)) {
+    telefonoError.textContent = "Ingresa al menos 10 dígitos numéricos.";
+    telefonoError.classList.remove("hidden");
+    isValid = false;
+    telefonoInput.focus();
+  } else {
+    telefonoError.textContent = "";
+    telefonoError.classList.add("hidden");
   }
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    limpiarMensajes();
+  // Validación correo
+  const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!correoValido.test(correo)) {
+    correoError.textContent = "Ingresa un correo electrónico válido.";
+    correoError.classList.remove("hidden");
+    if (isValid) correoInput.focus();
+    isValid = false;
+  } else {
+    correoError.textContent = "";
+    correoError.classList.add("hidden");
+  }
 
-    const telefono = telefonoInput.value.trim();
-    const correo = correoInput.value.trim();
-    let hayErrores = false;
+  if (!isValid) {
+    return; // Detiene el envío si hay errores
+  }
 
-    if (!/^\d{10,}$/.test(telefono)) {
-      errorTelefono.textContent = "Ingresa un número válido de al menos 10 dígitos.";
-      hayErrores = true;
-    }
+  // Si todo está bien, envía el formulario normalmente
+  this.submit();
+});
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
-      errorCorreo.textContent = "Ingresa un correo electrónico válido.";
-      hayErrores = true;
-    }
+// Validación en tiempo real TELÉFONO
+document.getElementById("Telefono").addEventListener("input", function() {
+  const valor = this.value.trim();
+  const soloNumeros = /^\d{10,}$/;
+  const telefonoError = document.getElementById("telefonoError");
 
-    if (hayErrores) return;
+  if (soloNumeros.test(valor)) {
+    telefonoError.textContent = "";
+    telefonoError.classList.add("hidden");
+  }
+});
 
-    const formData = new FormData(form);
+// Validación en tiempo real CORREO
+document.getElementById("Correo").addEventListener("input", function() {
+  const valor = this.value.trim();
+  const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const correoError = document.getElementById("correoError");
 
-    fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          message.textContent = "Registro enviado con éxito!";
-          message.className = "message success";
-          form.reset();
-          setTimeout(() => limpiarMensajes(), 4000);
-        } else {
-          message.textContent = "Error al enviar el formulario.";
-          message.className = "message error";
-        }
-      })
-      .catch(() => {
-        message.textContent = "Error en la conexión.";
-        message.className = "message error";
-      });
-  });
+  if (correoValido.test(valor)) {
+    correoError.textContent = "";
+    correoError.classList.add("hidden");
+  }
+});
 </script>
+
 
 <a href="https://wa.me/525532018918" target="_blank" aria-label="WhatsApp"
   class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50 transition duration-300">

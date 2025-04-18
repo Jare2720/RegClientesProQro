@@ -3,113 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro Clientes - ProyectaTenQro</title>
+  <title>Registro de Clientes</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-
-  <!-- Encabezado -->
-  <header class="bg-white shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center">
-      <img src="https://raw.githubusercontent.com/Jare2720/RegClientesProQro/main/Pag%20ppal%20-%20Logo%20redondo.png" alt="Logo" class="w-24 h-24 mr-4" />
-      <div class="text-left text-gray-800">
-        <p class="text-lg font-semibold leading-tight">SERVICIO de ASESORÍA</p>
-        <p class="text-lg font-semibold leading-tight">INMOBILIARIA</p>
-        <p class="text-sm">¡Juntos encontraremos el hogar de tus sueños!</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- Contenedor del formulario -->
-  <div class="max-w-2xl mx-auto mt-10 bg-white p-8 shadow-lg rounded">
-
-    <form id="registroForm" class="space-y-6" method="POST">
-      <!-- Nombre -->
-      <div>
-        <label for="Nombre" class="block font-medium">Nombre</label>
-        <input type="text" id="Nombre" name="Nombre" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6 text-center">Registro de Clientes</h1>
+    <form id="registroForm" method="POST" action="https://script.google.com/macros/s/AKfycbwvVx28TONBRyXJalzfraj8OErDPRrcVQAtll7sTGBWQKbDagUDRk6amr6QHJjsd-PF/exec">
+      
+      <div class="mb-4">
+        <label for="nombre" class="block font-medium">Nombre:</label>
+        <input type="text" id="nombre" name="Nombre" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
 
-      <!-- Teléfono -->
-      <div>
-        <label for="Teléfono" class="block font-medium">Teléfono</label>
-        <input type="tel" id="Teléfono" name="Teléfono" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
-        <p id="telefonoError" class="text-red-600 text-sm mt-1 hidden">📛 El número debe tener al menos 10 dígitos y solo números.</p>
+      <div class="mb-4">
+        <label for="telefono" class="block font-medium">Teléfono:</label>
+        <input type="text" id="telefono" name="Teléfono" required class="mt-1 w-full px-3 py-2 border rounded" />
+        <span id="telefonoError" class="text-red-500 text-sm mt-1 hidden">El teléfono debe tener exactamente 10 dígitos numéricos.</span>
       </div>
 
-      <!-- Correo -->
-      <div>
-        <label for="Correo" class="block font-medium">Correo</label>
-        <input type="email" id="Correo" name="Correo" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
-        <p id="correoError" class="text-red-600 text-sm mt-1 hidden">📛 Ingresa un correo válido.</p>
+      <div class="mb-4">
+        <label for="correo" class="block font-medium">Correo:</label>
+        <input type="email" id="correo" name="Correo" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
 
-      <!-- Botón -->
+      <div class="mb-4">
+        <label for="tipo" class="block font-medium">Tipo de propiedad:</label>
+        <select id="tipo" name="Tipo de propiedad" required class="mt-1 w-full px-3 py-2 border rounded">
+          <option value="" disabled selected hidden></option>
+          <option value="Casa">Casa</option>
+          <option value="Departamento">Departamento</option>
+          <option value="Terreno">Terreno</option>
+          <option value="Comercial">Comercial</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="zona" class="block font-medium">Zona de interés:</label>
+        <input type="text" id="zona" name="Zona de interés" required class="mt-1 w-full px-3 py-2 border rounded" />
+      </div>
+
+      <div class="mb-4">
+        <label for="presupuesto" class="block font-medium">Presupuesto:</label>
+        <input type="text" id="presupuesto" name="Presupuesto" required class="mt-1 w-full px-3 py-2 border rounded" />
+      </div>
+
+      <div class="mb-4">
+        <label for="origen" class="block font-medium">¿Cómo nos conoció?</label>
+        <select id="origen" name="Origen" required class="mt-1 w-full px-3 py-2 border rounded">
+          <option value="" disabled selected hidden></option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Sitio web">Sitio web</option>
+          <option value="Referido">Referido</option>
+          <option value="EasyBroker">EasyBroker</option>
+          <option value="Proppit">Proppit</option>
+          <option value="Lona">Lona</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="motivo" class="block font-medium">Propósito:</label>
+        <select id="motivo" name="Motivo" required class="mt-1 w-full px-3 py-2 border rounded">
+          <option value="" disabled selected hidden></option>
+          <option value="Vivir">Vivir</option>
+          <option value="Invertir">Invertir</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="tiempo" class="block font-medium">¿En cuánto tiempo planea comprar?</label>
+        <input type="text" id="tiempo" name="Tiempo" required class="mt-1 w-full px-3 py-2 border rounded" />
+      </div>
+
+      <div class="mb-4">
+        <label for="comentarios" class="block font-medium">Comentarios:</label>
+        <textarea id="comentarios" name="Comentarios" rows="3" class="mt-1 w-full px-3 py-2 border rounded"></textarea>
+      </div>
+
       <div class="text-center">
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
-          Enviar
-        </button>
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Enviar</button>
       </div>
-
-      <!-- Mensaje de éxito -->
-      <p id="successMessage" class="text-green-600 font-semibold text-center hidden">✅ ¡Formulario enviado con éxito!</p>
     </form>
+
+    <div id="mensajeExito" class="mt-4 text-green-600 text-center hidden">¡Formulario enviado con éxito!</div>
   </div>
 
-  <!-- Script de validación -->
   <script>
-    const form = document.getElementById('registroForm');
-    const telefonoInput = document.getElementById('Teléfono');
-    const telefonoError = document.getElementById('telefonoError');
-    const correoInput = document.getElementById('Correo');
-    const correoError = document.getElementById('correoError');
-    const successMessage = document.getElementById('successMessage');
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("registroForm");
+      const telefonoInput = document.getElementById("telefono");
+      const telefonoError = document.getElementById("telefonoError");
 
-    function validarTelefono() {
-      const telefono = telefonoInput.value.trim();
-      const soloNumeros = /^\d+$/;
-      if (!soloNumeros.test(telefono) || telefono.length < 10) {
-        telefonoError.classList.remove('hidden');
-        return false;
-      } else {
-        telefonoError.classList.add('hidden');
-        return true;
-      }
-    }
+      telefonoInput.addEventListener("input", function () {
+        const valor = telefonoInput.value.trim();
+        if (!/^\d{10}$/.test(valor)) {
+          telefonoInput.classList.add("border-red-500");
+          telefonoError.classList.remove("hidden");
+        } else {
+          telefonoInput.classList.remove("border-red-500");
+          telefonoError.classList.add("hidden");
+        }
+      });
 
-    function validarCorreo() {
-      const correo = correoInput.value.trim();
-      const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!formatoCorreo.test(correo)) {
-        correoError.classList.remove('hidden');
-        return false;
-      } else {
-        correoError.classList.add('hidden');
-        return true;
-      }
-    }
-
-    telefonoInput.addEventListener('input', validarTelefono);
-    correoInput.addEventListener('input', validarCorreo);
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const esTelefonoValido = validarTelefono();
-      const esCorreoValido = validarCorreo();
-
-      if (esTelefonoValido && esCorreoValido) {
-        // Aquí puedes enviar el formulario si está todo OK
-        successMessage.classList.remove('hidden');
-        setTimeout(() => {
-          successMessage.classList.add('hidden');
-          form.reset();
-        }, 3000);
-      }
+      form.addEventListener("submit", function (e) {
+        const valor = telefonoInput.value.trim();
+        if (!/^\d{10}$/.test(valor)) {
+          e.preventDefault();
+          telefonoInput.classList.add("border-red-500");
+          telefonoError.classList.remove("hidden");
+          telefonoInput.focus();
+        }
+      });
     });
   </script>
-
 </body>
 </html>
+
 
 

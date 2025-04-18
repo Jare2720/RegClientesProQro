@@ -97,6 +97,7 @@
       <div>
         <label class="label" for="correo">Correo electrónico</label>
         <input type="email" id="correo" name="Correo" required class="input-field shadow-sm h-10" placeholder="Escribe tu correo electrónico" />
+        <span id="correo-error" class="text-red-600 text-sm mt-1 block"></span>
       </div>
 
       <div>
@@ -174,68 +175,82 @@
     </form>
 
     <div id="message" class="message"></div>
-</div>
+  </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("registroForm");
+document.getElementById("registroForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
   const telefonoInput = document.getElementById("telefono");
-  const telefonoError = document.getElementById("telefono-error");
-  const message = document.getElementById("message");
+  const telefono = telefonoInput.value.trim();
   const correoInput = document.getElementById("correo");
+  const correo = correoInput.value.trim();
+  const message = document.getElementById("message");
+  const telefonoError = document.getElementById("telefono-error");
+  const correoError = document.getElementById("correo-error");
 
+  // Validación Teléfono
   const telefonoRegex = /^\d{10,}$/;
-  const correoRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  if (!telefonoRegex.test(telefono)) {
+    telefonoError.textContent = "Por favor ingresa un número de teléfono válido (al menos 10 dígitos).";
+    telefonoInput.focus();
+    return;
+  } else {
+    telefonoError.textContent = "";
+  }
 
-  telefonoInput.addEventListener("input", () => {
-    if (telefonoRegex.test(telefonoInput.value.trim())) {
-      telefonoError.textContent = "";
-    }
-  });
+  // Validación Correo
+  const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!correoRegex.test(correo)) {
+    correoError.textContent = "Por favor ingresa un correo electrónico válido.";
+    correoInput.focus();
+    return;
+  } else {
+    correoError.textContent = "";
+  }
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  const formData = new FormData(event.target);
 
-    const telefono = telefonoInput.value.trim();
-    const correo = correoInput.value.trim();
-
-    if (!telefonoRegex.test(telefono)) {
-      telefonoError.textContent = "Por favor ingresa un número de teléfono válido (al menos 10 dígitos).";
-      telefonoInput.focus();
-      return;
-    }
-
-    if (!correoRegex.test(correo)) {
-      message.textContent = "Por favor ingresa un correo electrónico válido.";
+  fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      message.textContent = "Registro enviado con éxito!";
+      message.className = "message success";
+      event.target.reset();
+    } else {
+      message.textContent = "Error al enviar el formulario.";
       message.className = "message error";
-      return;
     }
-
-    const formData = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
-      method: "POST",
-      body: formData,
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        message.textContent = "Registro enviado con éxito!";
-        message.className = "message success";
-        form.reset();
-      } else {
-        message.textContent = "Error al enviar el formulario.";
-        message.className = "message error";
-      }
-      setTimeout(() => {
-        message.textContent = "";
-      }, 3000);
-    })
-    .catch((error) => {
-      message.textContent = "Error en la conexión.";
-      message.className = "message error";
-    });
+    setTimeout(() => { message.textContent = ""; }, 3000);
+  })
+  .catch(error => {
+    message.textContent = "Error en la conexión.";
+    message.className = "message error";
   });
+});
+
+// Borrar error de teléfono al escribir
+document.getElementById("telefono").addEventListener("input", function () {
+  const telefonoRegex = /^\d{10,}$/;
+  const telefono = this.value.trim();
+  const telefonoError = document.getElementById("telefono-error");
+  if (telefonoRegex.test(telefono)) {
+    telefonoError.textContent = "";
+  }
+});
+
+// Borrar error de correo al escribir
+document.getElementById("correo").addEventListener("input", function () {
+  const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const correo = this.value.trim();
+  const correoError = document.getElementById("correo-error");
+  if (correoRegex.test(correo)) {
+    correoError.textContent = "";
+  }
 });
 </script>
 

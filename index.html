@@ -2,269 +2,114 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario de Registro de Clientes</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro Clientes - ProyectaTenQro</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    header {
-      background-color: #003366;
-      color: white;
-      padding: 20px;
-    }
-
-    .form-container {
-      background-color: #f3f4f6;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 5px;
-      background-color: white;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 10px;
-      background-color: #003366;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background-color: #002244;
-    }
-
-    .message {
-      text-align: center;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-
-    .message.success {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .message.error {
-      background-color: #F44336;
-      color: white;
-    }
-
-    .label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .error-text {
-      color: #e3342f;
-      font-size: 0.875rem;
-      margin-top: -0.75rem;
-      margin-bottom: 1rem;
-    }
-  </style>
 </head>
-<body>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
- <header>
-  <div class="flex justify-center items-center">
-    <img src="https://raw.githubusercontent.com/Jare2720/Reg_BD_ProQro_VA/main/Logo%20ProQro.png" alt="Logo ProQro" class="w-32">
-    <div class="text-center text-sm ml-4">
-      <p class="text-base font-semibold uppercase">Servicio de Asesoría Inmobiliaria</p>
-      <p class="text-sm italic">Juntos encontraremos el hogar de tus sueños!</p>
+  <!-- Encabezado -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center">
+      <img src="https://raw.githubusercontent.com/Jare2720/RegClientesProQro/main/Pag%20ppal%20-%20Logo%20redondo.png" alt="Logo" class="w-24 h-24 mr-4" />
+      <div class="text-left text-gray-800">
+        <p class="text-lg font-semibold leading-tight">SERVICIO de ASESORÍA</p>
+        <p class="text-lg font-semibold leading-tight">INMOBILIARIA</p>
+        <p class="text-sm">¡Juntos encontraremos el hogar de tus sueños!</p>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="form-container shadow-xl">
-    <form id="registroForm">
+  <!-- Contenedor del formulario -->
+  <div class="max-w-2xl mx-auto mt-10 bg-white p-8 shadow-lg rounded">
+
+    <form id="registroForm" class="space-y-6" method="POST">
+      <!-- Nombre -->
       <div>
-        <label class="label" for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="Nombre" required class="input-field shadow-sm h-10" placeholder="Escribe tu nombre" />
+        <label for="Nombre" class="block font-medium">Nombre</label>
+        <input type="text" id="Nombre" name="Nombre" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
       </div>
 
+      <!-- Teléfono -->
       <div>
-        <label class="label" for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="Teléfono" required class="input-field shadow-sm h-10" placeholder="Escribe tu teléfono" />
-        <div id="error-telefono" class="error-text"></div>
+        <label for="Teléfono" class="block font-medium">Teléfono</label>
+        <input type="tel" id="Teléfono" name="Teléfono" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
+        <p id="telefonoError" class="text-red-600 text-sm mt-1 hidden">📛 El número debe tener al menos 10 dígitos y solo números.</p>
       </div>
 
+      <!-- Correo -->
       <div>
-        <label class="label" for="correo">Correo electrónico</label>
-        <input type="email" id="correo" name="Correo" required class="input-field shadow-sm h-10" placeholder="Escribe tu correo electrónico" />
-        <div id="error-correo" class="error-text"></div>
+        <label for="Correo" class="block font-medium">Correo</label>
+        <input type="email" id="Correo" name="Correo" required class="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
+        <p id="correoError" class="text-red-600 text-sm mt-1 hidden">📛 Ingresa un correo válido.</p>
       </div>
 
-      <div>
-        <label class="label" for="tipo">Tipo de propiedad</label>
-        <select id="tipo" name="Tipo de propiedad" required class="input-field h-10 shadow-sm">
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="Casa">Casa</option>
-          <option value="Departamento">Departamento</option>
-          <option value="Terreno">Terreno</option>
-          <option value="Comercial">Comercial</option>
-          <option value="Otro">Otro</option>
-        </select>
+      <!-- Botón -->
+      <div class="text-center">
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+          Enviar
+        </button>
       </div>
 
-      <div>
-        <label class="label" for="zona">Zona de interés</label>
-        <input type="text" id="zona" name="Zona de interés" required class="input-field shadow-sm h-10" placeholder="Escribe la zona de interés" />
-      </div>
-
-      <div>
-        <label class="label" for="presupuesto">Presupuesto</label>
-        <select id="presupuesto" name="Presupuesto" required class="input-field h-10 shadow-sm">
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="Hasta $1M">Hasta $1M</option>
-          <option value="$1M - $2M">$1M - $2M</option>
-          <option value="$2M - $3M">$2M - $3M</option>
-          <option value="Más de $3M">Más de $3M</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="label" for="origen">¿Cómo te enteraste de nosotros?</label>
-        <select id="origen" name="Origen" required class="input-field h-10 shadow-sm">
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Página Web">Página Web</option>
-          <option value="Referidos">Referidos</option>
-          <option value="EasyBroker">EasyBroker</option>
-          <option value="Proppit">Proppit</option>
-          <option value="Remax">Remax</option>
-          <option value="Lona">Lona</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="label" for="objetivo">¿Buscas para vivir o invertir?</label>
-        <select id="objetivo" name="Motivo" required class="input-field h-10 shadow-sm">
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="Vivir">Vivir</option>
-          <option value="Invertir">Invertir</option>
-          <option value="Ambos">Ambos</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="label" for="tiempo">¿En cuánto tiempo planeas comprar?</label>
-        <select id="tiempo" name="Tiempo" required class="input-field h-10 shadow-sm">
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="Inmediato">Inmediato</option>
-          <option value="1 a 3 meses">1 a 3 meses</option>
-          <option value="4 a 6 meses">4 a 6 meses</option>
-          <option value="Más de 6 meses">Más de 6 meses</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="label" for="comentarios">Comentarios adicionales</label>
-        <textarea id="comentarios" name="Comentarios" required class="input-field shadow-sm h-10" placeholder="Escribe tus comentarios aquí"></textarea>
-      </div>
-
-      <div>
-        <button type="submit" class="submit-btn">Enviar</button>
-      </div>
+      <!-- Mensaje de éxito -->
+      <p id="successMessage" class="text-green-600 font-semibold text-center hidden">✅ ¡Formulario enviado con éxito!</p>
     </form>
-
-    <div id="message" class="message"></div>
   </div>
 
-<script>
-document.getElementById("registroForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-  
-  let isValid = true;
+  <!-- Script de validación -->
+  <script>
+    const form = document.getElementById('registroForm');
+    const telefonoInput = document.getElementById('Teléfono');
+    const telefonoError = document.getElementById('telefonoError');
+    const correoInput = document.getElementById('Correo');
+    const correoError = document.getElementById('correoError');
+    const successMessage = document.getElementById('successMessage');
 
-  const telefonoInput = document.getElementById("Telefono");
-  const correoInput = document.getElementById("Correo");
+    function validarTelefono() {
+      const telefono = telefonoInput.value.trim();
+      const soloNumeros = /^\d+$/;
+      if (!soloNumeros.test(telefono) || telefono.length < 10) {
+        telefonoError.classList.remove('hidden');
+        return false;
+      } else {
+        telefonoError.classList.add('hidden');
+        return true;
+      }
+    }
 
-  const telefonoError = document.getElementById("telefonoError");
-  const correoError = document.getElementById("correoError");
+    function validarCorreo() {
+      const correo = correoInput.value.trim();
+      const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formatoCorreo.test(correo)) {
+        correoError.classList.remove('hidden');
+        return false;
+      } else {
+        correoError.classList.add('hidden');
+        return true;
+      }
+    }
 
-  const telefono = telefonoInput.value.trim();
-  const correo = correoInput.value.trim();
+    telefonoInput.addEventListener('input', validarTelefono);
+    correoInput.addEventListener('input', validarCorreo);
 
-  // Validación teléfono
-  const soloNumeros = /^\d{10,}$/;
-  if (!soloNumeros.test(telefono)) {
-    telefonoError.textContent = "Ingresa al menos 10 dígitos numéricos.";
-    telefonoError.classList.remove("hidden");
-    isValid = false;
-    telefonoInput.focus();
-  } else {
-    telefonoError.textContent = "";
-    telefonoError.classList.add("hidden");
-  }
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-  // Validación correo
-  const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!correoValido.test(correo)) {
-    correoError.textContent = "Ingresa un correo electrónico válido.";
-    correoError.classList.remove("hidden");
-    if (isValid) correoInput.focus();
-    isValid = false;
-  } else {
-    correoError.textContent = "";
-    correoError.classList.add("hidden");
-  }
+      const esTelefonoValido = validarTelefono();
+      const esCorreoValido = validarCorreo();
 
-  if (!isValid) {
-    return; // Detiene el envío si hay errores
-  }
-
-  // Si todo está bien, envía el formulario normalmente
-  this.submit();
-});
-
-// Validación en tiempo real TELÉFONO
-document.getElementById("Telefono").addEventListener("input", function() {
-  const valor = this.value.trim();
-  const soloNumeros = /^\d{10,}$/;
-  const telefonoError = document.getElementById("telefonoError");
-
-  if (soloNumeros.test(valor)) {
-    telefonoError.textContent = "";
-    telefonoError.classList.add("hidden");
-  }
-});
-
-// Validación en tiempo real CORREO
-document.getElementById("Correo").addEventListener("input", function() {
-  const valor = this.value.trim();
-  const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const correoError = document.getElementById("correoError");
-
-  if (correoValido.test(valor)) {
-    correoError.textContent = "";
-    correoError.classList.add("hidden");
-  }
-});
-</script>
-
-
-<a href="https://wa.me/525532018918" target="_blank" aria-label="WhatsApp"
-  class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50 transition duration-300">
-  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-    <path
-      d="M12.04 2C6.51 2 2 6.49 2 12.01c0 1.98.52 3.82 1.43 5.42L2 22l4.66-1.39A10.005 10.005 0 0012.04 22C17.57 22 22 17.51 22 12S17.57 2 12.04 2zm0 18.17c-1.77 0-3.42-.52-4.81-1.41l-.34-.21-2.76.82.82-2.69-.22-.35a8.04 8.04 0 01-1.3-4.44c0-4.43 3.61-8.03 8.03-8.03 4.43 0 8.03 3.61 8.03 8.03s-3.6 8.03-8.03 8.03zm4.43-6.09c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12s-.62.77-.76.93c-.14.16-.28.17-.52.06-.24-.12-1.01-.37-1.92-1.17-.71-.63-1.19-1.41-1.33-1.65s-.01-.36.1-.48c.1-.1.24-.26.36-.39.12-.13.16-.22.24-.37.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.76-.2-.48-.4-.41-.54-.42-.14-.01-.3-.01-.46-.01s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.33.98 2.49c.12.16 1.7 2.59 4.12 3.63.58.25 1.03.4 1.38.51.58.19 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" />
-  </svg>
-</a>
+      if (esTelefonoValido && esCorreoValido) {
+        // Aquí puedes enviar el formulario si está todo OK
+        successMessage.classList.remove('hidden');
+        setTimeout(() => {
+          successMessage.classList.add('hidden');
+          form.reset();
+        }, 3000);
+      }
+    });
+  </script>
 
 </body>
 </html>
+
 

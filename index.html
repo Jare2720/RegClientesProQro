@@ -67,6 +67,13 @@
       display: block;
       margin-bottom: 8px;
     }
+
+    .error-text {
+      color: #e3342f;
+      font-size: 0.875rem;
+      margin-top: -0.75rem;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -91,11 +98,13 @@
       <div>
         <label class="label" for="telefono">Teléfono</label>
         <input type="tel" id="telefono" name="Teléfono" required class="input-field shadow-sm h-10" placeholder="Escribe tu teléfono" />
+        <div id="error-telefono" class="error-text"></div>
       </div>
 
       <div>
         <label class="label" for="correo">Correo electrónico</label>
         <input type="email" id="correo" name="Correo" required class="input-field shadow-sm h-10" placeholder="Escribe tu correo electrónico" />
+        <div id="error-correo" class="error-text"></div>
       </div>
 
       <div>
@@ -175,7 +184,6 @@
     <div id="message" class="message"></div>
   </div>
 
- <!-- VALIDACIÓN Y ENVÍO -->
 <script>
   const form = document.getElementById("registroForm");
   const message = document.getElementById("message");
@@ -193,21 +201,17 @@
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-
     limpiarMensajes();
 
     const telefono = telefonoInput.value.trim();
     const correo = correoInput.value.trim();
-
     let hayErrores = false;
 
-    // Validar teléfono
     if (!/^\d{10,}$/.test(telefono)) {
       errorTelefono.textContent = "Ingresa un número válido de al menos 10 dígitos.";
       hayErrores = true;
     }
 
-    // Validar correo
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
       errorCorreo.textContent = "Ingresa un correo electrónico válido.";
       hayErrores = true;
@@ -227,22 +231,19 @@
           message.textContent = "Registro enviado con éxito!";
           message.className = "message success";
           form.reset();
-          setTimeout(() => {
-            limpiarMensajes();
-          }, 4000); // Desaparece en menos de 5 segundos
+          setTimeout(() => limpiarMensajes(), 4000);
         } else {
           message.textContent = "Error al enviar el formulario.";
           message.className = "message error";
         }
       })
-      .catch((error) => {
+      .catch(() => {
         message.textContent = "Error en la conexión.";
         message.className = "message error";
       });
   });
 </script>
 
-<!-- BOTÓN FLOTANTE DE WHATSAPP -->
 <a href="https://wa.me/525532018918" target="_blank" aria-label="WhatsApp"
   class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50 transition duration-300">
   <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -253,3 +254,4 @@
 
 </body>
 </html>
+

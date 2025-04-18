@@ -196,31 +196,28 @@
   // Validación al salir del campo - Correo
   correoInput.addEventListener("blur", validarCorreo);
 
-  // Validación también al entrar a otro campo (focusin)
-  form.addEventListener("focusin", (e) => {
-    if (document.activeElement !== telefonoInput) validarTelefono();
-    if (document.activeElement !== correoInput) validarCorreo();
-  });
-
   function validarTelefono() {
     const valor = telefonoInput.value.replace(/\D/g, "");
     telefonoInput.value = valor;
-    if (valor.length < 10) {
+
+    if (valor.length > 0 && valor.length < 10) {
       telefonoInput.setCustomValidity("El teléfono debe tener al menos 10 dígitos.");
     } else {
       telefonoInput.setCustomValidity("");
     }
-    telefonoInput.reportValidity(); // Mostrar mensaje inmediatamente
+    telefonoInput.reportValidity(); // Solo se muestra si está mal
   }
 
   function validarCorreo() {
     const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    if (!correoValido.test(correoInput.value)) {
+    const valor = correoInput.value.trim();
+
+    if (valor !== "" && !correoValido.test(valor)) {
       correoInput.setCustomValidity("Por favor escribe un correo válido.");
     } else {
       correoInput.setCustomValidity("");
     }
-    correoInput.reportValidity(); // Mostrar mensaje inmediatamente
+    correoInput.reportValidity();
   }
 
   // Envío del formulario
@@ -251,7 +248,6 @@
       }
       form.reset();
 
-      // Ocultar mensaje después de 5 segundos
       setTimeout(() => {
         messageBox.className = "message hidden";
         messageBox.innerHTML = "";
@@ -263,8 +259,3 @@
     });
   });
 </script>
-
-
-
-
-

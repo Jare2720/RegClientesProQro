@@ -88,10 +88,11 @@
         <input type="text" id="nombre" name="Nombre" required class="input-field shadow-sm h-10" placeholder="Escribe tu nombre" />
       </div>
 
-      <div>
-        <label class="label" for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="Teléfono" required class="input-field shadow-sm h-10" placeholder="Escribe tu teléfono" />
-      </div>
+     <div>
+  <label class="label" for="telefono">Teléfono</label>
+  <input type="tel" id="telefono" name="Teléfono" required class="input-field shadow-sm h-10" placeholder="Escribe tu teléfono" />
+  <span id="telefono-error" class="text-red-600 text-sm mt-1 block"></span>
+</div>
 
       <div>
         <label class="label" for="correo">Correo electrónico</label>
@@ -180,16 +181,16 @@
     event.preventDefault();
     
     const telefono = document.getElementById("telefono").value.trim();
-    const correo = document.getElementById("correo").value.trim();
-    const message = document.getElementById("message");
+const correo = document.getElementById("correo").value.trim();
+const message = document.getElementById("message");
 
-    // Validación de teléfono (solo números y mínimo 10 dígitos)
-    const telefonoRegex = /^\d{10,}$/;
-    if (!telefonoRegex.test(telefono)) {
-      message.textContent = "Por favor ingresa un número de teléfono válido (solo números, al menos 10 dígitos).";
-      message.className = "message error";
-      return;
-    }
+// Validación de teléfono (solo números y mínimo 10 dígitos)
+const telefonoRegex = /^\d{10,}$/;
+if (!telefonoRegex.test(telefono)) {
+  message.textContent = "Por favor ingresa un número de teléfono válido (solo números, al menos 10 dígitos).";
+  message.className = "message error";
+  return;
+}
 
     // Validación de correo electrónico (formato básico)
     const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

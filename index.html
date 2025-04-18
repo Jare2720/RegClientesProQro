@@ -215,7 +215,6 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Validación antes del envío
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -241,7 +240,7 @@
       setTimeout(() => {
         messageBox.className = "message hidden";
         messageBox.innerHTML = "";
-      }, 10000);
+      }, 5000);
     })
     .catch(error => {
       messageBox.innerHTML = "Error en la conexión.";
@@ -252,5 +251,6 @@
 
 </body>
 </html>
+
 
 

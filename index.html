@@ -71,15 +71,22 @@
 </head>
 <body>
 
- <header>
-  <div class="flex justify-center items-center">
-    <img src="https://raw.githubusercontent.com/Jare2720/Reg_BD_ProQro_VA/main/Logo%20ProQro.png" alt="Logo ProQro" class="w-32">
-    <div class="text-center text-sm ml-4">
-      <p class="text-base font-semibold uppercase">Servicio de Asesoría Inmobiliaria</p>
-      <p class="text-sm italic">Juntos encontraremos el hogar de tus sueños!</p>
+ <!-- Encabezado con imagen de fondo -->
+<header class="relative h-40 md:h-48 flex items-center px-4 md:px-10 bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/Jare2720/RegClientesProQro/refs/heads/main/Portada%20ppal%20ProQro.jpg');">
+  <!-- Filtro oscuro -->
+  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+  <!-- Contenido del encabezado -->
+  <div class="relative z-10 flex items-center space-x-4">
+    <img src="https://github.com/Jare2720/RegClientesProQro/blob/main/Pag%20ppal%20-%20Logo%20redondo.png?raw=true" alt="Logo" class="w-24 h-24 md:w-28 md:h-28" />
+    <div class="text-white leading-tight">
+      <h1 class="text-lg md:text-xl font-semibold">SERVICIO de ASESORÍA</h1>
+      <h2 class="text-lg md:text-xl font-semibold">INMOBILIARIA</h2>
+      <p class="text-sm md:text-base">Juntos encontraremos el hogar de tus sueños!</p>
     </div>
   </div>
 </header>
+
 
 <div class="form-container shadow-xl">
     <form id="registroForm">

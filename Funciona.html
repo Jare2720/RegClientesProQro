@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Registro de Clientes</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: #f3f4f6;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #002244;
+    }
+
+    .message {
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .message.success {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .message.error {
+      background-color: #F44336;
+      color: white;
+    }
+
+    .label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+ <!-- Encabezado con imagen de fondo -->
+<header class="relative h-40 md:h-48 flex items-center px-4 md:px-10 bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/Jare2720/RegClientesProQro/refs/heads/main/Portada%20ppal%20ProQro.jpg');">
+  <!-- Filtro oscuro -->
+  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+  <!-- Contenido del encabezado -->
+  <div class="relative z-10 flex items-center space-x-4">
+    <img src="https://github.com/Jare2720/RegClientesProQro/blob/main/Pag%20ppal%20-%20Logo%20redondo.png?raw=true" alt="Logo" class="w-24 h-24 md:w-28 md:h-28" />
+    <div class="text-white leading-tight">
+      <h1 class="text-lg md:text-xl font-semibold">SERVICIO de ASESORÍA</h1>
+      <h2 class="text-lg md:text-xl font-semibold">INMOBILIARIA</h2>
+      <p class="text-sm md:text-base">Juntos encontraremos el hogar de tus sueños!</p>
+    </div>
+  </div>
+</header>
+
+
+<div class="form-container shadow-xl">
+    <form id="registroForm">
+      <div>
+        <label class="label" for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="Nombre" required class="input-field shadow-sm h-10" placeholder="Escribe tu nombre" />
+      </div>
+
+      <div>
+        <label class="label" for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="Teléfono" required class="input-field shadow-sm h-10" placeholder="Escribe tu teléfono" />
+        <span id="telefono-error" class="text-red-600 text-sm mt-1 block"></span>
+      </div>
+
+      <div>
+        <label class="label" for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="Correo" required class="input-field shadow-sm h-10" placeholder="Escribe tu correo electrónico" />
+        <span id="correo-error" class="text-red-600 text-sm mt-1 block"></span>
+      </div>
+
+      <div>
+        <label class="label" for="tipo">Tipo de propiedad</label>
+        <select id="tipo" name="Tipo de propiedad" required class="input-field h-10 shadow-sm">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Casa">Casa</option>
+          <option value="Departamento">Departamento</option>
+          <option value="Terreno">Terreno</option>
+          <option value="Comercial">Comercial</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="zona">Zona de interés</label>
+        <input type="text" id="zona" name="Zona de interés" required class="input-field shadow-sm h-10" placeholder="Escribe la zona de interés" />
+      </div>
+
+      <div>
+        <label class="label" for="presupuesto">Presupuesto</label>
+        <select id="presupuesto" name="Presupuesto" required class="input-field h-10 shadow-sm">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Hasta $1M">Hasta $1M</option>
+          <option value="$1M - $2M">$1M - $2M</option>
+          <option value="$2M - $3M">$2M - $3M</option>
+          <option value="Más de $3M">Más de $3M</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="origen">¿Cómo te enteraste de nosotros?</label>
+        <select id="origen" name="Origen" required class="input-field h-10 shadow-sm">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Página Web">Página Web</option>
+          <option value="Referidos">Referidos</option>
+          <option value="EasyBroker">EasyBroker</option>
+          <option value="Proppit">Proppit</option>
+          <option value="Remax">Remax</option>
+          <option value="Lona">Lona</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="objetivo">¿Buscas para vivir o invertir?</label>
+        <select id="objetivo" name="Motivo" required class="input-field h-10 shadow-sm">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Vivir">Vivir</option>
+          <option value="Invertir">Invertir</option>
+          <option value="Ambos">Ambos</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="tiempo">¿En cuánto tiempo planeas comprar?</label>
+        <select id="tiempo" name="Tiempo" required class="input-field h-10 shadow-sm">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Inmediato">Inmediato</option>
+          <option value="1 a 3 meses">1 a 3 meses</option>
+          <option value="4 a 6 meses">4 a 6 meses</option>
+          <option value="Más de 6 meses">Más de 6 meses</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="comentarios">Comentarios adicionales</label>
+        <textarea id="comentarios" name="Comentarios" required class="input-field shadow-sm h-10" placeholder="Escribe tus comentarios aquí"></textarea>
+      </div>
+
+      <div>
+        <button type="submit" class="submit-btn">Enviar</button>
+      </div>
+    </form>
+
+    <div id="message" class="message"></div>
+  </div>
+
+<script>
+  document.getElementById("registroForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const telefonoInput = document.getElementById("telefono");
+    const telefono = telefonoInput.value.trim();
+    const correoInput = document.getElementById("correo");
+    const correo = correoInput.value.trim();
+    const message = document.getElementById("message");
+    const telefonoError = document.getElementById("telefono-error");
+    const correoError = document.getElementById("correo-error");
+
+    // Validación Teléfono
+    const telefonoRegex = /^\d{10,}$/;
+    if (!telefonoRegex.test(telefono)) {
+      telefonoError.textContent = "Por favor ingresa un número de teléfono válido (al menos 10 dígitos).";
+      telefonoInput.focus();
+      return;
+    } else {
+      telefonoError.textContent = "";
+    }
+
+    // Validación Correo
+    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!correoRegex.test(correo)) {
+      correoError.textContent = "Por favor ingresa un correo electrónico válido.";
+      correoInput.focus();
+      return;
+    } else {
+      correoError.textContent = "";
+    }
+
+    const formData = new FormData(event.target);
+
+    fetch("https://script.google.com/macros/s/AKfycbyCOCU0sfiBkaZETrHVug4yNuVoFn3Ps1PYCXVGQUy9ggc7X7I0nDDHImMIV7WezDyg/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        message.textContent = "Registro enviado con éxito!";
+        message.className = "message success";
+        event.target.reset();
+      } else {
+        message.textContent = "Error al enviar el formulario.";
+        message.className = "message error";
+      }
+      setTimeout(() => {
+  message.textContent = "";
+  message.className = ""; // <- Esto borra también la caja verde
+}, 3000);
+    })
+    .catch(error => {
+      message.textContent = "Error en la conexión.";
+      message.className = "message error";
+    });
+  });
+
+  // Borrar error de teléfono al escribir
+  document.getElementById("telefono").addEventListener("input", function () {
+    const telefonoRegex = /^\d{10,}$/;
+    const telefono = this.value.trim();
+    const telefonoError = document.getElementById("telefono-error");
+    if (telefonoRegex.test(telefono)) {
+      telefonoError.textContent = "";
+    }
+  });
+
+  // Borrar error de correo al escribir
+  document.getElementById("correo").addEventListener("input", function () {
+    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const correo = this.value.trim();
+    const correoError = document.getElementById("correo-error");
+    if (correoRegex.test(correo)) {
+      correoError.textContent = "";
+    }
+  });
+</script>
+
+<!-- Bloque de contacto por WhatsApp -->
+<div class="mt-6 text-center">
+  <p class="mb-2">¿Tienes dudas o quieres contactarnos directamente?</p>
+  <a href="https://wa.me/525532018918" target="_blank" class="inline-flex items-center text-green-600 hover:underline">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6 mr-2">
+    +52 5532018918
+  </a>
+</div>
+
+</body>
+</html>
+
+

@@ -3,152 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registro Clientes</title>
+  <title>Formulario de Registro de Clientes</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: #f3f4f6;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #002244;
+    }
+
+    .message {
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .message.success {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .message.error {
+      background-color: #F44336;
+      color: white;
+    }
+
+    .label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body class="bg-gray-100">
 
-  <!-- ENCABEZADO CON IMAGEN, LOGO Y TEXTO ENCIMA -->
-  <div class="relative w-full h-[300px]">
-    <img src="https://raw.githubusercontent.com/Jare2720/RegClientesProQro/refs/heads/main/Portada%20ppal%20ProQro.jpg" 
-         alt="Portada" class="absolute inset-0 w-full h-full object-cover z-0" />
-
-    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center px-6 md:px-20 z-10">
-      <img src="https://raw.githubusercontent.com/Jare2720/RegClientesProQro/main/Pag%20ppal%20-%20Logo%20redondo.png" 
-           alt="Logo" class="w-24 h-24 md:w-32 md:h-32 mr-6"/>
-
-      <div class="text-white">
-        <h1 class="text-xl md:text-2xl font-semibold leading-tight">SERVICIO de ASESORÍA</h1>
-        <h2 class="text-xl md:text-2xl font-semibold leading-tight">INMOBILIARIA</h2>
-        <p class="text-md md:text-lg mt-1">¡Juntos encontraremos el hogar de tus sueños!</p>
-      </div>
+<!-- ENCABEZADO VISUAL -->
+<header class="relative h-40 md:h-52 flex items-center px-4 md:px-10 bg-cover bg-center shadow-md" style="background-image: url('https://raw.githubusercontent.com/Jare2720/RegClientesProQro/refs/heads/main/Portada%20ppal%20ProQro.jpg');">
+  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+  <div class="relative z-10 flex items-center space-x-4">
+    <img src="https://github.com/Jare2720/RegClientesProQro/blob/main/Pag%20ppal%20-%20Logo%20redondo.png?raw=true" alt="Logo" class="w-24 h-24 md:w-28 md:h-28" />
+    <div class="text-white leading-tight">
+      <h1 class="text-lg md:text-xl font-semibold">SERVICIO de ASESORÍA</h1>
+      <h2 class="text-lg md:text-xl font-semibold">INMOBILIARIA</h2>
+      <p class="text-sm md:text-base">Juntos encontraremos el hogar de tus sueños!</p>
     </div>
   </div>
+</header>
 
-  <!-- FORMULARIO (TAL CUAL YA FUNCIONABA) -->
-  <div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
-    <form id="registroForm">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="block text-gray-700">Nombre</label>
-          <input type="text" name="Nombre" placeholder="Nombre completo" required class="w-full border rounded px-3 py-2 mt-1"/>
-        </div>
-        <div>
-          <label class="block text-gray-700">Teléfono</label>
-          <input type="tel" name="Teléfono" id="telefono" placeholder="Ej. 5551234567" required class="w-full border rounded px-3 py-2 mt-1"/>
-          <p id="telefonoError" class="text-red-500 text-sm mt-1 hidden">Ingresa un teléfono válido de 10 dígitos</p>
-        </div>
-        <div>
-          <label class="block text-gray-700">Correo</label>
-          <input type="email" name="Correo" id="correo" placeholder="correo@ejemplo.com" required class="w-full border rounded px-3 py-2 mt-1"/>
-          <p id="correoError" class="text-red-500 text-sm mt-1 hidden">Ingresa un correo válido</p>
-        </div>
-        <div>
-          <label class="block text-gray-700">Tipo de propiedad</label>
-          <select name="Tipo de propiedad" required class="w-full border rounded px-3 py-2 mt-1">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Casa">Casa</option>
-            <option value="Departamento">Departamento</option>
-            <option value="Terreno">Terreno</option>
-            <option value="Comercial">Comercial</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-gray-700">Zona de interés</label>
-          <input type="text" name="Zona de interés" placeholder="Ej. Zibatá, Centro, El Refugio" class="w-full border rounded px-3 py-2 mt-1"/>
-        </div>
-        <div>
-          <label class="block text-gray-700">Presupuesto</label>
-          <input type="text" name="Presupuesto" placeholder="Ej. 2,000,000" class="w-full border rounded px-3 py-2 mt-1"/>
-        </div>
-        <div>
-          <label class="block text-gray-700">Origen</label>
-          <select name="Origen" required class="w-full border rounded px-3 py-2 mt-1">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Facebook">Facebook</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Sitio web">Sitio web</option>
-            <option value="Referido">Referido</option>
-            <option value="Lona">Lona</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-gray-700">Motivo</label>
-          <select name="Motivo" required class="w-full border rounded px-3 py-2 mt-1">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Vivir">Vivir</option>
-            <option value="Invertir">Invertir</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-gray-700">Tiempo</label>
-          <select name="Tiempo" required class="w-full border rounded px-3 py-2 mt-1">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Inmediato">Inmediato</option>
-            <option value="1-3 meses">1-3 meses</option>
-            <option value="3-6 meses">3-6 meses</option>
-            <option value="Más de 6 meses">Más de 6 meses</option>
-          </select>
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-gray-700">Comentarios</label>
-          <textarea name="Comentarios" rows="3" placeholder="Agrega detalles adicionales" class="w-full border rounded px-3 py-2 mt-1"></textarea>
-        </div>
-      </div>
-      <button type="submit" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded">
-        Enviar
-      </button>
-      <p id="successMessage" class="text-green-600 font-semibold mt-4 hidden">Formulario enviado con éxito</p>
-    </form>
-  </div>
+<!-- LÍNEA DIVISORIA -->
+<div class="h-2 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 shadow"></div>
 
-  <!-- SCRIPT DE VALIDACIÓN Y ENVÍO -->
-  <script>
-    document.getElementById("registroForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+<!-- FORMULARIO -->
+<div class="form-container shadow-xl mt-6">
+  <form id="registroForm">
+    <label class="label" for="nombre">Nombre completo</label>
+    <input class="input-field" type="text" id="nombre" name="Nombre" required />
 
-      const telefono = document.getElementById("telefono").value.trim();
-      const correo = document.getElementById("correo").value.trim();
-      let valid = true;
+    <label class="label" for="telefono">Teléfono</label>
+    <input class="input-field" type="tel" id="telefono" name="Teléfono" placeholder="10 dígitos" required />
 
-      // Validación teléfono
-      if (!/^\d{10}$/.test(telefono)) {
-        document.getElementById("telefonoError").classList.remove("hidden");
-        valid = false;
-      } else {
-        document.getElementById("telefonoError").classList.add("hidden");
-      }
+    <label class="label" for="correo">Correo electrónico</label>
+    <input class="input-field" type="email" id="correo" name="Correo" required />
 
-      // Validación correo
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
-        document.getElementById("correoError").classList.remove("hidden");
-        valid = false;
-      } else {
-        document.getElementById("correoError").classList.add("hidden");
-      }
+    <label class="label" for="tipo">Tipo de propiedad</label>
+    <select class="input-field" id="tipo" name="Tipo de propiedad" required>
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="Casa">Casa</option>
+      <option value="Departamento">Departamento</option>
+      <option value="Terreno">Terreno</option>
+      <option value="Comercial">Comercial</option>
+    </select>
 
-      if (valid) {
-        const formData = new FormData(this);
-        fetch('https://script.google.com/macros/s/AKfycbwvVx28TONBRyXJalzfraj8OErDPRrcVQAtll7sTGBWQKbDagUDRk6amr6QHJjsd-PF/exec', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => {
-          if (response.ok) {
-            document.getElementById("successMessage").classList.remove("hidden");
-            this.reset();
-            setTimeout(() => {
-              document.getElementById("successMessage").classList.add("hidden");
-            }, 4000);
-          } else {
-            alert("Hubo un error al enviar el formulario.");
-          }
-        })
-        .catch(() => alert("Error de conexión al enviar el formulario."));
-      }
+    <label class="label" for="zona">Zona de interés</label>
+    <input class="input-field" type="text" id="zona" name="Zona de interés" required />
+
+    <label class="label" for="presupuesto">Presupuesto estimado</label>
+    <input class="input-field" type="text" id="presupuesto" name="Presupuesto" required />
+
+    <label class="label" for="origen">¿Cómo nos conociste?</label>
+    <select class="input-field" id="origen" name="Origen" required>
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="Facebook">Facebook</option>
+      <option value="Instagram">Instagram</option>
+      <option value="Sitio web">Sitio web</option>
+      <option value="Referido">Referido</option>
+      <option value="EasyBroker">EasyBroker</option>
+      <option value="Propiedades.com">Propiedades.com</option>
+      <option value="Lona">Lona</option>
+      <option value="Otro">Otro</option>
+    </select>
+
+    <label class="label" for="motivo">Motivo de búsqueda</label>
+    <select class="input-field" id="motivo" name="Motivo" required>
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="Vivir">Vivir</option>
+      <option value="Invertir">Invertir</option>
+    </select>
+
+    <label class="label" for="tiempo">¿En cuánto tiempo te gustaría comprar?</label>
+    <select class="input-field" id="tiempo" name="Tiempo" required>
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="Menos de 1 mes">Menos de 1 mes</option>
+      <option value="1 a 3 meses">1 a 3 meses</option>
+      <option value="3 a 6 meses">3 a 6 meses</option>
+      <option value="Más de 6 meses">Más de 6 meses</option>
+    </select>
+
+    <label class="label" for="comentarios">Comentarios adicionales</label>
+    <textarea class="input-field" id="comentarios" name="Comentarios" rows="3"></textarea>
+
+    <button class="submit-btn" type="submit">Enviar</button>
+    <div id="mensaje" class="message" style="display:none;"></div>
+  </form>
+</div>
+
+<!-- ÍCONO WHATSAPP -->
+<a href="https://wa.me/525532018918" target="_blank" class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 .01 5.36.01 12c0 2.11.55 4.18 1.6 6.01L0 24l6.21-1.62A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22c-1.85 0-3.67-.49-5.26-1.41l-.38-.22-3.69.97.99-3.59-.25-.37A9.93 9.93 0 0 1 2 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm5.19-7.6c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.85 1.08-.16.18-.31.2-.59.07-.28-.14-1.18-.43-2.25-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.19-.28.28-.47.09-.18.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.01-.22-.54-.45-.47-.61-.48h-.52c-.18 0-.47.07-.72.34-.25.28-.95.93-.95 2.28 0 1.35.98 2.65 1.12 2.84.14.18 1.91 2.91 4.63 4.08.65.28 1.16.45 1.55.58.65.21 1.25.18 1.72.11.52-.08 1.65-.67 1.88-1.31.23-.65.23-1.2.16-1.31-.07-.11-.26-.18-.54-.32z"/></svg>
+</a>
+
+<!-- VALIDACIÓN Y ENVÍO -->
+<script>
+  document.getElementById("registroForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const telefono = document.getElementById("telefono").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const mensaje = document.getElementById("mensaje");
+
+    const telefonoValido = /^\d{10}$/.test(telefono);
+    const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo);
+
+    if (!telefonoValido || !correoValido) {
+      mensaje.textContent = "Por favor verifica que el teléfono y el correo sean válidos.";
+      mensaje.className = "message error";
+      mensaje.style.display = "block";
+      return;
+    }
+
+    const formData = new FormData(this);
+
+    fetch("https://script.google.com/macros/s/AKfycbwvVx28TONBRyXJalzfraj8OErDPRrcVQAtll7sTGBWQKbDagUDRk6amr6QHJjsd-PF/exec", {
+      method: "POST",
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+      mensaje.textContent = "Registro enviado con éxito.";
+      mensaje.className = "message success";
+      mensaje.style.display = "block";
+      document.getElementById("registroForm").reset();
+    })
+    .catch(error => {
+      mensaje.textContent = "Ocurrió un error. Inténtalo de nuevo.";
+      mensaje.className = "message error";
+      mensaje.style.display = "block";
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
-

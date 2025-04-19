@@ -225,7 +225,10 @@
         message.textContent = "Error al enviar el formulario.";
         message.className = "message error";
       }
-      setTimeout(() => { message.textContent = ""; }, 3000);
+      setTimeout(() => {
+  message.textContent = "";
+  message.className = ""; // <- Esto borra también la caja verde
+}, 3000);
     })
     .catch(error => {
       message.textContent = "Error en la conexión.";
